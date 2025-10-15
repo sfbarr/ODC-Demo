@@ -1,0 +1,52 @@
+/* === Base setup === */
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  background: #f7f7f7;
+  color: #222;
+}
+
+/* === Header layout === */
+header {
+  background: linear-gradient(90deg, #5a74c6, #e09a8f);
+  color: #fff;
+  padding: 12px 0;
+}
+
+header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* === Brand side === */
+.brand-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-left img {
+  height: 44px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+header small {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* === Partner side === */
+.partner-right img {
+  height: 44px;
+  max-width: 300px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.15));
+}
