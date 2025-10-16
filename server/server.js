@@ -1,7 +1,8 @@
 // server/server.js
+import { fileURLToPath } from 'url';
 import express from 'express';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import 'dotenv/config';
 
 // For resolving __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -9,6 +10,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+import { Pool } from 'pg';
+const db = new Pool();
+
 
 
 // Serve static files (like CSS, JS, images) from /public
@@ -24,6 +29,23 @@ app.on('connection', (stream) => {
 app.get(['/', '/index.html'], (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
+
+
+// Sanity check endpoint
+app.get('/hello', (req,res) => { console.log('hit /hello'); res.send('hi'); });
+
+
+app.get('/data', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM sci_grants LIMIT 10');
+    res.json(result.rows); // send rows as JSON to frontend
+  } catch (err) {
+    console.error('Error querying DB:', err);
+    res.status(500).send('Something went wrong.');
+  }
+});
+
+
 
 // (Optional) Simple health check
 app.get('/api/health', (req, res) => {

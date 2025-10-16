@@ -26,4 +26,19 @@
     </header>
     
   </body>
+
+  <script>
+    fetch('/data')
+    .then(res => res.json())
+    .then(rows => {
+      console.log("Received rows from server:", rows);
+      // Just as a visual proof of life:
+      const pre = document.createElement('pre');
+      pre.textContent = JSON.stringify(rows, null, 2);
+      document.body.appendChild(pre);
+    })
+    .catch(err => {
+      console.error('Fetch error:', err);
+    });
+  </script>
 </html>
