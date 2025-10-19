@@ -37,7 +37,7 @@ app.get('/hello', (req,res) => { console.log('hit /hello'); res.send('hi'); });
 
 app.get('/data', async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM sci_grants LIMIT 10');
+    const result = await db.query('SELECT * FROM sci_grants');
     res.json(result.rows); // send rows as JSON to frontend
   } catch (err) {
     console.error('Error querying DB:', err);
@@ -46,10 +46,10 @@ app.get('/data', async (req, res) => {
 });
 
 
-
 // (Optional) Simple health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
+  res.send('<p>Hello Citizen!</p>');
 });
 
 // Basic error handler (optional)
